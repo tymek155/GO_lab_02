@@ -3,7 +3,7 @@ import AlgorytmJarvisa
 import Wektor
 import Wielokat
 import Statek
-from Show import wyswietl_wielokat_short, wyswietl_punkty_short
+from Show import wyswietl_wielokat_short, wyswietl_punkt, zakoncz_rysowanie
 
 
 class Zadanie2:
@@ -27,11 +27,11 @@ class Zadanie2:
         statek = Statek.Statek(wielokat_statek, pozycja_poczatkowa, predkosc)
 
         #Wczytaj dane o pociskach
-        pociski = read.wczytaj_pociski("missles2.txt")
+        pociski = read.wczytaj_pociski("missles1.txt")
 
 
         #Wyrowanj statek
-        statek.wielokat.wyrownaj_punkty(statek.wielokat, statek.pozycja_poczatkowa)
+        punkt_odniesienia = statek.wielokat.wyrownaj_punkty(statek.wielokat.punkty, statek.pozycja_poczatkowa)
 
         #Wyswietl plansze
         iter_czas = 0
@@ -41,17 +41,22 @@ class Zadanie2:
                 i.zaktualizuj_pozycje_pocisk()
 
             if iter_czas != 0:
-                statek.zaktualizuj_pozycje()
+                statek.zaktualizuj_pozycje(punkt_odniesienia)
 
+            do_dodania = []
             for i in pociski:
                 if i.czas_wykrycia <= iter_czas:
                     if i not in aktywne_pociski:
-                        aktywne_pociski.append(i)
+                        do_dodania.append(i)
 
-            wyswietl_wielokat_short(statek)
+            for i in do_dodania:
+                i.zaktualizuj_pozycje_start()
+            aktywne_pociski.extend(do_dodania)
+
+            wyswietl_wielokat_short(statek.wielokat)
             for i in aktywne_pociski:
-                wys
-
+                wyswietl_punkt(i.punkt)
+            zakoncz_rysowanie(punkt_odniesienia)
 
             iter_czas += 0.1
 

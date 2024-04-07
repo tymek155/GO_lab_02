@@ -1,5 +1,6 @@
 from Linia import Linia
 from Punkt import Punkt
+import Wektor
 
 class Wielokat:
     def __init__(self, wierzcholki):
@@ -45,9 +46,21 @@ class Wielokat:
                 return None
 
     def wyrownaj_punkty(self, lista_punktow, punkt_odniesienia):
-        roznica_x = punkt_odniesienia.x
-        roznica_y = punkt_odniesienia.y
+        srednia_x = 0
+        srednia_y = 0
 
-        for punkt in lista_punktow:
-            punkt.x -= roznica_x
-            punkt.y -= roznica_y
+        for i in lista_punktow:
+            srednia_x += i.x
+            srednia_y += i.y
+
+        srednia_x = srednia_x/len(lista_punktow)
+        srednia_y = srednia_y/len(lista_punktow)
+
+        wektor_przesuniecia = Wektor.Wektor(punkt_odniesienia.x - srednia_x, punkt_odniesienia.y - srednia_y)
+
+        #aktualizacja punktow
+        for i in lista_punktow:
+            i.x+=wektor_przesuniecia.x
+            i.y+=wektor_przesuniecia.y
+
+        return Punkt(srednia_x+ wektor_przesuniecia.x, srednia_y + wektor_przesuniecia.y)

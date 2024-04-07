@@ -37,6 +37,9 @@ def wyswietl_punkty_short(lista_pkt):
     ax = plt.gca()
     ax.set_aspect('equal', adjustable='box')
 
+def wyswietl_punkt(punkt):
+    plt.scatter(punkt.x, punkt.y, color="blue")
+
 def wyswietl_wielokat(wielokat):
     #if wielokat.sprawdz_przeciecia() == False:
     #    return None
@@ -53,5 +56,11 @@ def wyswietl_wielokat_short(wielokat):
     #plt.axis('square')
     wyswietl_linie_short(Linia(wielokat.punkty[0], wielokat.punkty[len(wielokat.punkty)-1]))
 
-def zakoncz_rysowanie():
+def zakoncz_rysowanie(punkt_odniesienia):
+    plt.xlim(punkt_odniesienia.x-500, punkt_odniesienia.x+500)
+    plt.ylim(punkt_odniesienia.y-500, punkt_odniesienia.y+500)
+    plt.xlabel("OŚ X")
+    plt.ylabel("OŚ Y")
+    plt.title("Układ współrzędnych")
+    plt.grid(True)
     plt.show()
