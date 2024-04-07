@@ -1,20 +1,11 @@
-import Read
-import AlgorytmJarvisa
-from Show import wyswietl_punkty, wyswietl_punkty_short
-from AlgorytmJarvisa2 import gift_wrapping
+import Zadanie1
 
 def main():
-    r = Read.Read
-    lista_punktow  = []
-    lista_punktow, ilosc = r.read_file("dane2.txt")
-    print(ilosc)
-    #wyswietl_punkty(lista_punktow)
-    algorytmJ = AlgorytmJarvisa.AlgorytmJarvisa()
-    lewa, prawa = algorytmJ.otoczka(lista_punktow)
-    punkty = gift_wrapping(lista_punktow)
-    wyswietl_punkty_short(lewa)
-    wyswietl_punkty(prawa)
-    wyswietl_punkty(punkty)
+    zadanie1 = Zadanie1.Zadanie1()
+    #zadanie1.pokaz_figury_1()
+    #zadanie1.pokaz_figury_2()
+    zadanie1.pokaz_figury_1()
+    zadanie1.figura_otoczka_2()
 
 if __name__ == '__main__':
     main()

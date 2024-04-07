@@ -44,3 +44,4 @@ class Linia:
         else:
             print("Punkt leży po prawej stronie.")
             return 1
+
