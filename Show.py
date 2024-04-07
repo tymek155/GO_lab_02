@@ -64,3 +64,6 @@ def zakoncz_rysowanie(punkt_odniesienia):
     plt.title("Układ współrzędnych")
     plt.grid(True)
     plt.show()
+
+def komunikat_postrzal(punkt_odniesienia):
+    plt.text(punkt_odniesienia.x, punkt_odniesienia.y+250, "Trafiono w statek!")

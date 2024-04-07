@@ -45,3 +45,34 @@ class Linia:
             print("Punkt leży po prawej stronie.")
             return 1
 
+    def przeciecie_prostych(self, prosta2):
+        A1, B1, C1 = self.rownanie_ogolne()
+        A2, B2, C2 = prosta2.rownanie_ogolne()
+        if (A1 * B2 - A2 * B1) == 0:
+            print("Proste rownolegle!")
+            return None
+        else:
+            px = ((C2 * B1 - C1 * B2) / (A1 * B2 - A2 * B1))
+            py = ((A2 * C1 - A1 * C2) / (A1 * B2 - A2 * B1))
+            punkt_przec = Punkt(px, py)
+            return punkt_przec
+
+    def przeciecie_linii_ret_pkt(self, linia2):
+        punkt = self.przeciecie_prostych(linia2)
+        psx1 = min(self.pkt_1.x, self.pkt_2.x)
+        psx2 = max(self.pkt_1.x, self.pkt_2.x)
+
+        psy1 = min(self.pkt_1.y, self.pkt_2.y)
+        psy2 = max(self.pkt_1.y, self.pkt_2.y)
+        if (punkt != None):
+            if punkt.x >= psx1 and punkt.x <= psx2 and punkt.y >= psy1 and punkt.y <= psy2:
+                plx1 = min(linia2.pkt_1.x, linia2.pkt_2.x)
+                plx2 = max(linia2.pkt_1.x, linia2.pkt_2.x)
+
+                ply1 = min(linia2.pkt_1.y, linia2.pkt_2.y)
+                ply2 = max(linia2.pkt_1.y, linia2.pkt_2.y)
+
+                if punkt.x >= plx1 and punkt.x <= plx2 and punkt.y >= ply1 and punkt.y <= ply2:
+                    print("Punkt lezy na przecieciu linii!")
+                    return True, punkt
+        return False, None

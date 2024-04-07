@@ -1,9 +1,11 @@
+import Pocisk
+import Punkt
 import Read
 import AlgorytmJarvisa
 import Wektor
 import Wielokat
 import Statek
-from Show import wyswietl_wielokat_short, wyswietl_punkt, zakoncz_rysowanie
+from Show import wyswietl_wielokat_short, wyswietl_punkt, zakoncz_rysowanie, komunikat_postrzal
 
 
 class Zadanie2:
@@ -23,11 +25,11 @@ class Zadanie2:
         wielokat_statek = Wielokat.Wielokat(jotoczka)
 
         #Wczytaj dane o statku
-        pozycja_poczatkowa, predkosc = read.wczytaj_dane_statek("space_craft1.txt")
+        pozycja_poczatkowa, predkosc = read.wczytaj_dane_statek("space_craft3.txt")
         statek = Statek.Statek(wielokat_statek, pozycja_poczatkowa, predkosc)
 
         #Wczytaj dane o pociskach
-        pociski = read.wczytaj_pociski("missles1.txt")
+        pociski = read.wczytaj_pociski("missles3.txt")
 
 
         #Wyrowanj statek
@@ -52,6 +54,11 @@ class Zadanie2:
             for i in do_dodania:
                 i.zaktualizuj_pozycje_start()
             aktywne_pociski.extend(do_dodania)
+            #aktywne_pociski.append(Pocisk.Pocisk(0.231, punkt_odniesienia, 0))
+
+            for i in aktywne_pociski:
+                if statek.wielokat.sprawdz_przynaleznosc_punktu(i.punkt) == True:
+                    komunikat_postrzal(punkt_odniesienia)
 
             wyswietl_wielokat_short(statek.wielokat)
             for i in aktywne_pociski:
