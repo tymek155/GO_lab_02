@@ -13,4 +13,7 @@ class Wektor:
         cos = iloczyn_wek / (self.dlg_wektora() * wektor2.dlg_wektora())
         kat_rad = math.acos(cos)
         kat_stopnie = math.degrees(kat_rad)
+        determinant = self.x * wektor2.y - self.y * wektor2.x
+        if determinant < 0:
+            return 360 - kat_stopnie
         return kat_stopnie

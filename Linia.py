@@ -40,7 +40,7 @@ class Linia:
             return 2
         elif wynik > 0:
             print("Punkt leży po lewej stronie.")
-            return 1
+            return 3
         else:
             print("Punkt leży po prawej stronie.")
-            return 3
+            return 1

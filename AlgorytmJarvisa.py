@@ -44,33 +44,44 @@ class AlgorytmJarvisa:
                 lewe.append(i)
         return prawe, lewe
 
+    def sprawdz_strone(self, czesc, wektor10, punkt_poczatkowy, punkt_kon):
+        lista_wynik = []
+        lista_wynik.append(punkt_poczatkowy)
+
+        iter = 0
+        while (True):
+            do_dodania = czesc[0]
+            if do_dodania.x - lista_wynik[iter].x == 0 and do_dodania.y - lista_wynik[iter].y == 0:
+                continue
+            kat = wektor10.kat_miedzy_wektorami(Wektor.Wektor(do_dodania.x - lista_wynik[iter].x, do_dodania.y - lista_wynik[iter].y))
+            for i in range(1, len(czesc)):
+                if czesc[i].x - lista_wynik[iter].x == 0 and czesc[i].y - lista_wynik[iter].y == 0:
+                    continue
+                spr_kat = wektor10.kat_miedzy_wektorami(Wektor.Wektor(czesc[i].x - lista_wynik[iter].x, czesc[i].y - lista_wynik[iter].y))
+                if spr_kat < kat:
+                    do_dodania = czesc[i]
+                    kat = spr_kat
+            lista_wynik.append(do_dodania)
+            czesc.remove(do_dodania)
+            iter = iter + 1
+            if do_dodania == punkt_kon:
+                break
+        return lista_wynik
+
     def otoczka(self, lista_punktow):
         punkt_min, punkt_max = self.max_min(lista_punktow)
         linia = Linia.Linia(punkt_min, punkt_max)
         prawa_cz, lewa_cz = self.podziel_punkty(lista_punktow, linia)
         prawa_cz.append(punkt_max)
+        lewa_cz.append(punkt_min)
 
-        #tworzenie prawej strony
-        punkt_poczatkowy = punkt_min
-        lista_wynik = []
-        lista_wynik.append(punkt_poczatkowy)
+        #Tworzenie prawej i lewej storny
         wektor10 = Wektor.Wektor(1,0)
-        start = prawa_cz[0]
-        kat = wektor10.kat_miedzy_wektorami(Wektor.Wektor(start.x - punkt_min.x, start.y - punkt_max.y))
+        wektor_10 = Wektor.Wektor(-1, 0)
 
-        iter = 0
-        while(True):
-            do_dodania = prawa_cz[0]
-            kat = wektor10.kat_miedzy_wektorami(Wektor.Wektor(do_dodania.x - lista_wynik[0].x, do_dodania.y - lista_wynik[0].y))
-            for i in range(1, len(prawa_cz)):
-                spr_kat = wektor10.kat_miedzy_wektorami(Wektor.Wektor(prawa_cz[i].x - lista_wynik[iter].x, prawa_cz[i].y - lista_wynik[iter].y))
-                if spr_kat < kat:
-                    do_dodania = prawa_cz[i]
-                    kat = spr_kat
-            lista_wynik.append(do_dodania)
-            prawa_cz.remove(do_dodania)
-            if do_dodania == punkt_min:
-                break
+        prawa_otoczka = self.sprawdz_strone(prawa_cz, wektor10, punkt_min, punkt_max)
+        lewa_otoczka = self.sprawdz_strone(lewa_cz, wektor_10, punkt_max, punkt_min)
+        return lewa_otoczka, prawa_otoczka
 
 
 
