@@ -54,7 +54,7 @@ class Zadanie2:
             for i in do_dodania:
                 i.zaktualizuj_pozycje_start()
             aktywne_pociski.extend(do_dodania)
-            #aktywne_pociski.append(Pocisk.Pocisk(0.231, punkt_odniesienia, 0))
+            aktywne_pociski.append(Pocisk.Pocisk(0.231, punkt_odniesienia, 0))
 
             for i in aktywne_pociski:
                 if statek.wielokat.sprawdz_przynaleznosc_punktu(i.punkt) == True:
